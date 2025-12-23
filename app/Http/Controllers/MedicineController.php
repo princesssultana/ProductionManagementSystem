@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class MedicineController extends Controller
 {
-    public function create()
+     public function index()
     {
-        return view ('create');
+        return view('pages.medicine-list');
     }
 }

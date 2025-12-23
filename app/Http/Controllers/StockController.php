@@ -6,9 +6,8 @@ use Illuminate\Http\Request;
 
 class StockController extends Controller
 {
-     public function stock()
+     public function index()
     {
-        return view ('stock');
+        return view('pages.stocks');
     }
 }
-
