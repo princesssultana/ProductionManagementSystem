@@ -16,14 +16,21 @@
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('category.list')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Category list
+                                    Categories
                                 </a> 
                             </li>
 
                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('medicine.list')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Medicine
+                                    Medicines
+                                </a> 
+                            </li>
+
+                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('customer.index')}}"> <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Customers
                                 </a> 
                             </li>
 
@@ -37,53 +44,44 @@
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('materials.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Packaging material
+                                    Packaging materials
                                 </a> 
                             </li>
 
-                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin-users.index')}}"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Admin user
-                                </a> 
-                            </li>
-                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('factory-settings.index')}}"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Factory settings
-                                </a> 
-                            </li>
+                            
+                            
                               <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('stocks.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
                                     Stock
                                 </a> 
                             </li>
-                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('report.list')}}"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Report
-                                </a> 
-                            </li>
+                            
 
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('payments.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Payment
+                                    Payments
                                 </a> 
-                            </li>
-
-                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin-users.index')}}"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#house-fill"></use>
-                                    </svg>
-                                    Admin user
-                                </a> 
-                            </li>
+                                </li>
+                           
 
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('report.list')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Report
+                                    Reports
+                                </a> 
+                            </li>
+                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin-users.index')}}"> <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Admin users
+                                </a> 
+                            </li>
+                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('factory-settings.index')}}"> <svg class="bi" aria-hidden="true">
+                                        <use xlink:href="#house-fill"></use>
+                                    </svg>
+                                    Factory settings
                                 </a> 
                             </li>
                             

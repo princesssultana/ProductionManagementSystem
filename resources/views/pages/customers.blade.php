@@ -2,8 +2,8 @@
 
 @section('content')
 
-<h1>Category list</h1>
 
+<h5>Customer list</h5>
 <table class="table">
   <thead>
     <tr>
@@ -34,5 +34,6 @@
     </tr>
   </tbody>
 </table>
+
 
 @endsection

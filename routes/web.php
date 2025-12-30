@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategorylistController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DemandDetailsController;
 use App\Http\Controllers\FactorySettingsController;
 use App\Http\Controllers\HomeController;
@@ -20,7 +22,10 @@ Route::get('/',[HomeController::class,'home']);
 
 Route::get('/about-us',[HomeController::class,'aboutUs']);
 
-Route::get('/category-list', [CategoryListController::class, 'categorylist'])->name('category.list');
+
+
+Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
+Route::get('/category-list/create-form', [CategoryController::class, 'createform'])->name('category.create.form');
 
 Route::get('/report-list', [ReportController::class, 'index'])->name('report.list');
 Route::get('/report-create',[ReportController::class, 'create'])->name('report.create');
@@ -48,3 +53,5 @@ Route::get('/admin-users/create', [AdminUserController::class, 'create'])->name(
 
 Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
 Route::get('/payments/search', [PaymentController::class, 'search'])->name('payments.search');
+
+Route::get('/customers', [CustomerController::class, 'index'])->name('customer.index');

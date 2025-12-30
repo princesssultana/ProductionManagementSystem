@@ -8,6 +8,6 @@ class PackagingMaterialsController extends Controller
 {
      public function index()
     {
-        return view('pages.metarials');
+        return view('pages.materials');
     }
 }
