@@ -27,6 +27,11 @@ Route::get('/about-us',[HomeController::class,'aboutUs']);
 Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
 Route::get('/category-list/create-form', [CategoryController::class, 'createform'])->name('category.create.form');
 
+Route::post('/category-list/submit', [CategoryController::class, 'storeCategory'])->name('category.store');
+
+
+
+
 Route::get('/report-list', [ReportController::class, 'index'])->name('report.list');
 Route::get('/report-create',[ReportController::class, 'create'])->name('report.create');
 
