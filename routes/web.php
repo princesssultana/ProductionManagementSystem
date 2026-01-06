@@ -24,10 +24,28 @@ Route::get('/about-us',[HomeController::class,'aboutUs']);
 
 
 
-Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
-Route::get('/category-list/create-form', [CategoryController::class, 'createform'])->name('category.create.form');
+
+
+Route::get('/category-list/create-form', [CategoryController::class, 'createForm'])
+     ->name('category.create.form');
+
 
 Route::post('/category-list/submit', [CategoryController::class, 'storeCategory'])->name('category.store');
+
+
+
+
+
+// ১. লিস্ট দেখার জন্য
+Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
+
+// ২. ফর্ম দেখার জন্য
+Route::get('/category-list/create', [CategoryController::class, 'createForm'])->name('category.create.form');
+
+// ৩. ডাটা সেভ করার জন্য (POST method)
+Route::post('/category-list/store', [CategoryController::class, 'storeCategory'])->name('category.store');
+
+
 
 
 
