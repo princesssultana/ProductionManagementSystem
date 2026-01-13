@@ -11,10 +11,10 @@
   <table class="table table-striped table-hover">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">Medicine Name</th>
-        <th scope="col">Batch No</th>
-        <th scope="col">Quantity</th>
+        <th scope="col">SL</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Category Description</th>
+        <th scope="col">Status</th>
         <th scope="col">Actions</th>
       </tr>
     </thead>
@@ -26,9 +26,9 @@
 @foreach($puddingBox as $pudding)
 <tr>
     <td>{{ $pudding->id }}</td>
-    <td>{{ $pudding->medicine_name }}</td>
-    <td>{{ $pudding->batch_no }}</td>
-    <td>{{ $pudding->quantity }}</td>
+    <td>{{ $pudding->name }}</td>
+    <td>{{ $pudding->description }}</td>
+    <td>{{ $pudding->status }}</td>
     <td>
         <a href="#" class="btn btn-primary">View</a>
         <a href="#" class="btn btn-warning">Edit</a>
