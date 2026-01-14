@@ -9,7 +9,16 @@ class CustomerController extends Controller
 
 
 {
-    
+    public function view($id)
+{
+    $customer = Customer::findOrFail($id);
+    return view('pages.customer.view', compact('customer'));
+}
+  public function edit($id)
+{
+    $customer = Customer::findOrFail($id);
+    return view('pages.customer.edit', compact('customer'));
+}
  
     public function create()
     {
@@ -28,7 +37,7 @@ class CustomerController extends Controller
 
     ]);
 
-    return redirect()->route('customer.list');
+    return redirect()->route('customer.index');
 
     }
      public function index()
@@ -43,6 +52,35 @@ class CustomerController extends Controller
         $customer = Customer::find($id);
         return view('pages.customer.view', compact('customer'));
     }
+    public function update(Request $request, $id)
+{
+    $customer = Customer::findOrFail($id);
+
+    // Validation (optional)
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:customers,email,'.$id,
+        'phone' => 'required',
+        'status' => 'required'
+    ]);
+
+    $customer->update($request->all());
+
+    return redirect()->route('customer.index')->with('success', 'Customer updated successfully');
+}
+public function destroy($id)
+{
+    // Customer find or fail
+    $customer = Customer::findOrFail($id);
+
+    // Delete the customer
+    $customer->delete();
+
+    // Redirect back with success message
+    return redirect()->route('customer.index')->with('success', 'Customer deleted successfully');
+}
+
+
 
 
 }

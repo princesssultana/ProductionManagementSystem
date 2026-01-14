@@ -20,18 +20,23 @@
     </thead>
     <tbody>
       @foreach($customers as $cust)
-        <tr>
-            <td>{{ $cust->id}}</td>
-          <td>{{ $cust->name}}</td>
-          <td>{{ $cust->phone}}</td>
-           <td>{{$cust->email}}</td>
-           <td>{{ $cust->status}}</td>
-         <td>
-            <a href="/customer/view/{{ $cust->id }}" class="btn btn-sm btn-info">View</a>
-                <a href="/customer/edit/{{ $cust->id }}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="/customer/delete/{{ $cust->id }}" class="btn btn-sm btn-danger">Delete</a>
-          </td>
-        </tr>
+       <tr>
+    <td>{{ $cust->id }}</td>
+    <td>{{ $cust->name }}</td>
+    <td>{{ $cust->phone }}</td>
+    <td>{{ $cust->email }}</td>
+    <td>{{ $cust->status }}</td>
+    <td>
+        <a href="{{ route('customer.view', $cust->id) }}" class="btn btn-sm btn-info">View</a>
+        <a href="{{ route('customer.edit', $cust->id) }}" class="btn btn-sm btn-warning">Edit</a>
+        <form action="{{ route('customer.destroy', $cust->id) }}" method="POST" style="display:inline;">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+        </form>
+    </td>
+</tr>
+
       @endforeach
     </tbody>
   </table>

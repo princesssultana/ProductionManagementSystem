@@ -9,6 +9,7 @@ use App\Http\Controllers\DemandDetailsController;
 use App\Http\Controllers\FactorySettingsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\PackagingMaterialController;
 use App\Http\Controllers\PackagingMaterialsController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
@@ -32,11 +33,27 @@ Route::post('/category-list/store', [CategoryController::class, 'storeCategory']
 Route::get('/products',[ProductController::class,'list'])->name('products.list');
 Route::get('/product/form', [ProductController::class, 'create'])->name('product.create');
 Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
-Route::get('/customer/list',[CustomerController::class,'index'])->name('customer.list');
-Route::get('/customer/form',[CustomerController::class,'create'])->name('customer.create');
-Route::post('/customer/store',[CustomerController::class,'store'])->name('customer.store');
-Route::resource('demands', DemandController::class);
 
+// Customer list page
+Route::get('/customer/list', [CustomerController::class, 'index'])->name('customer.index');
+
+// Customer view page
+Route::get('/customer/view/{id}', [CustomerController::class, 'view'])->name('customer.view');
+
+// Customer create page
+Route::get('/customer/form', [CustomerController::class, 'create'])->name('customer.create');
+Route::post('/customer/store', [CustomerController::class, 'store'])->name('customer.store');
+
+// Customer edit page
+Route::get('/customer/edit/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+Route::put('/customer/update/{id}', [CustomerController::class, 'update'])->name('customer.update');
+
+// Customer delete
+Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->name('customer.destroy');
+
+Route::resource('demands', DemandController::class);
+Route::resource('materials', PackagingMaterialsController::class);
+Route::resource('stocks', StockController::class);
 
 
 
@@ -47,15 +64,10 @@ Route::get('/report-create',[ReportController::class, 'create'])->name('report.c
 
 
 
-Route::get('/stock', [ReportController::class, 'index'])->name('stocks.index');
 
 
 
 
-
-
-Route::get('/materials', [PackagingMaterialsController::class, 'index'])->name('materials.index');
-Route::get('/materials/create', [PackagingMaterialsController::class, 'create'])->name('materials.create');
 
 Route::get('/factory-settings', [FactorySettingsController::class, 'index'])->name('factory-settings.index');
 Route::get('/factory-settings/create', [FactorySettingsController::class, 'create'])->name('factory-settings.create');

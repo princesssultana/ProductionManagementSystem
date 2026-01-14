@@ -27,7 +27,7 @@
                                 </a> 
                             </li>
 
-                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('customer.list')}}"> <svg class="bi" aria-hidden="true">
+                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('customer.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
                                     Customers
