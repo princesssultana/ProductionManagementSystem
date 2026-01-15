@@ -104,7 +104,8 @@
 </head>
 
 <body> 
-    
+    @stack('scripts')
+
 
 
 @include('partials.header')

@@ -54,15 +54,18 @@
         </div>
 
         <!-- Factory Selection (Optional) -->
-        <div class="mb-3">
-            <label class="form-label">Factory (Optional)</label>
-            <select class="form-control" name="factory_id">
-                <option value="">Select Factory</option>
-                @foreach($factories as $factory)
-                    <option value="{{ $factory->id }}">{{ $factory->name }}</option>
-                @endforeach
-            </select>
-        </div>
+        {{--
+<div class="mb-3">
+    <label class="form-label">Factory (Optional)</label>
+    <select class="form-control" name="factory_id">
+        <option value="">Select Factory</option>
+        @foreach($factories as $factory)
+            <option value="{{ $factory->id }}">{{ $factory->name }}</option>
+        @endforeach
+    </select>
+</div>
+--}}
+
 
         <button type="submit" class="btn btn-success">Save Stock</button>
         <a href="{{ route('stocks.index') }}" class="btn btn-secondary">Back</a>

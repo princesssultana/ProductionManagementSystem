@@ -28,10 +28,18 @@
             </select>
         </div>
 
-        <div class="form-group">
-            <label>Approved Quantity (if approved)</label>
-            <input name="approved_qty" type="number" class="form-control" value="{{ $demand->approved_qty }}">
-        </div>
+      <div class="form-group">
+    <label>Approved Quantity (if approving)</label>
+    <input 
+        name="approved_qty" 
+        type="number" 
+        class="form-control" 
+        value="{{ $demand->status == 'Approved' ? $demand->approved_qty : '' }}"
+        min="1"
+        max="{{ $demand->material->stock ?? 0 }}"
+    >
+</div>
+
 
         <button type="submit" class="btn btn-success mt-3">Update</button>
         <a href="{{ route('demands.index') }}" class="btn btn-secondary mt-3">Cancel</a>
@@ -39,3 +47,4 @@
 </div>
 
 @endsection
+

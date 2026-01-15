@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminnController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategorylistController;
@@ -54,13 +55,17 @@ Route::delete('/customer/delete/{id}', [CustomerController::class, 'destroy'])->
 Route::resource('demands', DemandController::class);
 Route::resource('materials', PackagingMaterialsController::class);
 Route::resource('stocks', StockController::class);
+Route::get('/admin', [AdminnController::class, 'dashboard'])
+    ->name('admin.dashboard');
+Route::put('/demands/{demand}', [DemandController::class, 'update'])->name('demands.update');
+Route::get('/reports/production', [ReportController::class, 'productionReport'])
+    ->name('reports.production');
 
 
 
 
 
-Route::get('/report-list', [ReportController::class, 'index'])->name('report.list');
-Route::get('/report-create',[ReportController::class, 'create'])->name('report.create');
+
 
 
 
@@ -74,8 +79,6 @@ Route::get('/factory-settings/create', [FactorySettingsController::class, 'creat
 
 
 
-Route::get('/admin-users', [AdminUserController::class, 'index'])->name('admin-users.index');
-Route::get('/admin-users/create', [AdminUserController::class, 'create'])->name('admin-users.create');
 
 Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
 Route::get('/payments/search', [PaymentController::class, 'search'])->name('payments.search');

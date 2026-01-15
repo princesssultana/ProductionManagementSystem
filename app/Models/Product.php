@@ -14,6 +14,10 @@ class Product extends Model
    // 'medicine_name', 'batch_no', 'quantity', 'production_date', 
     //'expiry_date', 'image', 'description', 'status'];
  protected $guarded = [];
+ public function demands()
+{
+    return $this->hasMany(Demand::class, 'medicine_id'); // link via medicine_id
+}
  
 
 

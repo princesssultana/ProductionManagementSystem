@@ -14,7 +14,7 @@ class StockController extends Controller
 {
     public function index()
     {
-        $stocks = Stock::with('stockable', 'demands')->latest()->get();
+        $stocks = Stock::with('medicine', 'demands')->latest()->get();
         return view('pages.stock.index', compact('stocks'));
     }
 

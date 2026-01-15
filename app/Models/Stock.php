@@ -9,20 +9,46 @@ class Stock extends Model
 {
     use HasFactory;
 
+    protected $table = 'stocks';
+
     protected $fillable = [
-        'stockable_type', 'stockable_id', 'quantity', 
-        'batch_no', 'expiry_date', 'status'
+        'stockable_id',
+        'stockable_type',
+        'medicine_id',
+        'quantity',
+        'batch_no',
+        'expiry_date',
+        'status',
     ];
-
-    protected $dates = ['expiry_date'];
-
+    
     public function stockable()
     {
         return $this->morphTo();
     }
 
+    protected $casts = [
+        'expiry_date' => 'date',
+    ];
+
+    // Relationship: Stock → Demands
     public function demands()
     {
-        return $this->morphMany(Demand::class, 'stockable');
+        return $this->hasMany(Demand::class, 'medicine_id');
     }
+public function stock()
+{
+    return $this->belongsTo(Stock::class, 'medicine_id');
+}
+
+public function medicine()
+{
+    return $this->belongsTo(Product::class, 'medicine_id');
+}
+
+
+
+
+
+
+
 }
