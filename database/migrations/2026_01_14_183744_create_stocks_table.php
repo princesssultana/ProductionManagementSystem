@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
+            
             // Polymorphic relation to Medicine or PackagingMaterial
             $table->morphs('stockable'); // creates stockable_id + stockable_type
 

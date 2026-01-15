@@ -60,9 +60,15 @@ Route::get('/admin', [AdminnController::class, 'dashboard'])
 Route::put('/demands/{demand}', [DemandController::class, 'update'])->name('demands.update');
 Route::get('/reports/production', [ReportController::class, 'productionReport'])
     ->name('reports.production');
+   
+//Route::prefix('admin')->group(function() {
+   // Route::get('factory', [FactorySettingsController::class, 'index'])->name('factory.index');
+//});
+
+Route::resource('factories', FactorySettingsController::class);
 
 
-Route::get('/test', [CategoryController::class, 'test']);
+
 
 
 

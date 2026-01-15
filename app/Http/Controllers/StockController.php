@@ -7,6 +7,7 @@ use App\Models\Medicine;
 use App\Models\PackagingMaterial;
 use App\Models\Factory;
 use App\Models\Demand;
+use App\Models\FactorySetting;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -60,7 +61,7 @@ class StockController extends Controller
         $stock = Stock::findOrFail($id);
         $medicines = Product::all();
         $materials = PackagingMaterial::all();
-        //$factories = Factory::all();
+        $factories = FactorySetting::all();
 
         return view('pages.stock.edit', compact('stock', 'medicines', 'materials', 'factories'));
     }
