@@ -62,6 +62,7 @@ Route::get('/reports/production', [ReportController::class, 'productionReport'])
     ->name('reports.production');
 
 
+Route::get('/test', [CategoryController::class, 'test']);
 
 
 

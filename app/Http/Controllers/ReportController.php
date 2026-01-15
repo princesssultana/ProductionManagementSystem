@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Production;
-use App\Models\Demand;
 use App\Models\Product;
+use App\Models\Demand;
 use App\Models\Stock;
 
 class ReportController extends Controller
@@ -15,15 +14,22 @@ class ReportController extends Controller
         $from = $request->from;
         $to   = $request->to;
 
-        $productions = Product::when($from && $to, function ($query) use ($from, $to) {
-            $query->whereBetween('created_at', [$from, $to]);
-        })->get();
+        $productions = Product::query()
+            ->when($from && $to, function ($query) use ($from, $to) {
+                $query->whereBetween('created_at', [
+                    $from . ' 00:00:00',
+                    $to   . ' 23:59:59'
+                ]);
+            })
+            ->latest()
+            ->get();
 
-        $totalProduction = $productions->sum('quantity');
-        $totalDemand = Demand::sum('quantity');
-        $totalStock = Stock::sum('quantity');
+        // 🔥 products table অনুযায়ী sum
+        $totalProduction = $productions->sum('stock');
+        $totalDemand     = Demand::sum('qty');
+        $totalStock      = Product::sum('stock');
 
-        return view('pages.reports.production', compact(
+        return view('pages.report.production', compact(
             'productions',
             'totalProduction',
             'totalDemand',
@@ -33,4 +39,3 @@ class ReportController extends Controller
         ));
     }
 }
-

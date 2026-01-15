@@ -66,8 +66,8 @@
                     @forelse($productions as $key => $production)
                         <tr>
                             <td>{{ $key + 1 }}</td>
-                            <td>{{ $production->medicine_name }}</td>
-                            <td>{{ $production->quantity }}</td>
+                            <td>{{ $production->name }}</td>  {{-- name column from products --}}
+                            <td>{{ $production->stock }}</td> {{-- stock column from products --}}
                             <td>{{ $production->created_at->format('d M Y') }}</td>
                         </tr>
                     @empty

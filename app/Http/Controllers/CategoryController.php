@@ -6,9 +6,14 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
-{
+
+{ 
+
+
     public function list()
-    {
+
+    { 
+
         $puddingBox = Category::all();
         return view('pages.category.list', compact('puddingBox'));
     }
