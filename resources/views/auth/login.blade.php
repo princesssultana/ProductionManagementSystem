@@ -60,7 +60,7 @@
                     <div class="alert alert-info mt-3">
                         <small>
                             <strong>Demo Credentials:</strong><br>
-                            Admin: admin@example.com / admin123456<br>
+                            Admin: admin@gmail.com / 123456<br>
                             User: user@example.com / user123456
                         </small>
                     </div>

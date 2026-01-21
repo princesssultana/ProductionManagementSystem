@@ -23,17 +23,21 @@
 
  
 
-@foreach($puddingBox as $pudding)
+@foreach($categories as $category)
 <tr>
-    <td>{{ $pudding->id }}</td>
-    <td>{{ $pudding->name }}</td>
-    <td>{{ $pudding->description }}</td>
-    <td>{{ $pudding->status }}</td>
+    <td>{{ $category->id }}</td>
+    <td>{{ $category->name }}</td>
+    <td>{{ $category->description }}</td>
+    <td>{{ $category->status }}</td>
     <td>
-        <a href="#" class="btn btn-primary">View</a>
-        <a href="#" class="btn btn-warning">Edit</a>
-        <a href="#" class="btn btn-danger">Delete</a>
-    </td>
+        <a href="{{route('categories.edit',$category->id)}}" class="btn btn-primary">Edit</a>
+        <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+    
+      </td>
 </tr>
 @endforeach
 

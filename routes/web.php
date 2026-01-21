@@ -39,6 +39,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/category-list', [CategoryController::class, 'list'])->name('category.list');
     Route::get('/category-list/create', [CategoryController::class, 'createForm'])->name('category.create.form');
     Route::post('/category-list/store', [CategoryController::class, 'storeCategory'])->name('category.store');
+    // routes/web.php
+    Route::resource('categories', CategoryController::class)->except(['show']);
+    
     Route::get('/products',[ProductController::class,'list'])->name('products.list');
     Route::get('/product/form', [ProductController::class, 'create'])->name('product.create');
     Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');

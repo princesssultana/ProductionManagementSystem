@@ -13,7 +13,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6">
             <div class="card h-100 shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <div class="rounded-circle bg-primary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <div class="rounded-circle bg-primary d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
                         <i class="bi bi-capsule text-primary" style="font-size: 28px;"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $totalMedicines }}</h3>
@@ -25,7 +25,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6">
             <div class="card h-100 shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <div class="rounded-circle bg-success bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <div class="rounded-circle bg-success  d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
                         <i class="bi bi-tags text-success" style="font-size: 28px;"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $totalCategories }}</h3>
@@ -37,7 +37,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6">
             <div class="card h-100 shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <div class="rounded-circle bg-info bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <div class="rounded-circle bg-info  d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
                         <i class="bi bi-clipboard-check text-info" style="font-size: 28px;"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $totalProductionOrders }}</h3>
@@ -49,7 +49,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6">
             <div class="card h-100 shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <div class="rounded-circle bg-warning bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <div class="rounded-circle bg-warning  d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
                         <i class="bi bi-box2 text-warning" style="font-size: 28px;"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $totalPackagingMaterials }}</h3>
@@ -61,7 +61,7 @@
         <div class="col-lg-2 col-md-4 col-sm-6">
             <div class="card h-100 shadow-sm border-0 rounded-3">
                 <div class="card-body text-center">
-                    <div class="rounded-circle bg-secondary bg-opacity-10 d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
+                    <div class="rounded-circle bg-secondary  d-inline-flex align-items-center justify-content-center" style="width: 60px; height: 60px; margin-bottom: 15px;">
                         <i class="bi bi-people text-secondary" style="font-size: 28px;"></i>
                     </div>
                     <h3 class="fw-bold mb-1">{{ $totalUsers }}</h3>
@@ -72,7 +72,7 @@
     </div>
 
     {{-- Production Orders Status --}}
-    <div class="row g-4 mb-4">
+    <!-- <div class="row g-4 mb-4">
         <div class="col-lg-4">
             <div class="card shadow-sm border-0 rounded-3 h-100">
                 <div class="card-body">
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     {{-- Charts Row --}}
     <div class="row g-4 mb-4">

@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Astro v5.13.2">
-    <title>Kodeeo</title>
+    <title>PMS</title>
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     <script src="/docs/5.3/assets/js/color-modes.js"></script>
     <link href="https://getbootstrap.com/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -119,7 +119,7 @@
         @endif
 
             <main class="@if(Auth::check()) col-md-9 ms-sm-auto col-lg-10 @else col-md-12 @endif px-md-4">
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 ">
                     
                     
                 </div>
