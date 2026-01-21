@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Demand;
+use App\Models\DemandItem;
 use App\Models\Product;
 use App\Models\Stock;
 use App\Models\PackagingMaterial;
@@ -42,7 +43,7 @@ class AdminnController extends Controller
             ->pluck('total', 'month');
 
         // Monthly Medicine Demand Quantity
-        $monthlyDemandQty = Demand::selectRaw('MONTH(created_at) as month')
+        $monthlyDemandQty = DemandItem::selectRaw('MONTH(created_at) as month, SUM(quantity) as total')
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->pluck('total', 'month');
