@@ -35,7 +35,7 @@ public function storeCategory(Request $request)
         'status'          => $request->status,
     ]);
 
-    return redirect()->route('products.list');
+    return redirect()->route('category.list');
 }
 
 

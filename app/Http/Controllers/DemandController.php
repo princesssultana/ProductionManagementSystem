@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demand;
+use App\Models\DemandItem;
 use App\Models\PackagingMaterial;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -11,35 +12,44 @@ class DemandController extends Controller
 {
 public function index()
 {
-    $demands = Demand::with('material')->latest()->get();
+    $demands = Demand::with('items.product')->latest()->get();
     return view('pages.demand.index', compact('demands'));
 }
 
 public function create()
 {
-    $medicines = Product::all();
+    $medicines = Product::with('packagingMaterials')->get();
     return view('pages.demand.create', compact('medicines'));
 }
 
 
 public function store(Request $request)
 {
-    // 1. Validate request
+    // Validate request
     $request->validate([
-        'medicine_id' => 'required|exists:products,id',
-        'qty' => 'required|numeric|min:1',
         'name' => 'nullable|string',
+        'products' => 'required|array|min:1',
+        'products.*' => 'required|exists:products,id',
+        'quantities.*' => 'required|numeric|min:1',
     ]);
 
-    // 2. Create demand
-    Demand::create([
-        'medicine_id' => $request->medicine_id,
-        'qty' => $request->qty,
-        'name' => $request->name,
+    // Create demand
+    $demand = Demand::create([
+        'name' => $request->name ?? 'Demand ' . now()->format('Y-m-d H:i'),
         'status' => 'Pending',
+        'date_requested' => now()->toDateString(),
     ]);
 
-    return redirect()->route('demands.index')->with('success', 'Demand saved successfully.');
+    // Add demand items (products to the demand)
+    foreach ($request->products as $index => $productId) {
+        DemandItem::create([
+            'demand_id' => $demand->id,
+            'product_id' => $productId,
+            'quantity' => $request->quantities[$index],
+        ]);
+    }
+
+    return redirect()->route('demands.index')->with('success', 'Demand created successfully.');
 }
 
 
@@ -47,60 +57,53 @@ public function store(Request $request)
 
 public function show($id)
 {
-    $demand = Demand::findOrFail($id);
+    $demand = Demand::with('items.product.packagingMaterials')->findOrFail($id);
     return view('pages.demand.show', compact('demand'));
 }
 
 public function edit($id)
 {
-    $demand = Demand::findOrFail($id);
-    return view('pages.demand.edit', compact('demand'));
+    $demand = Demand::with('items')->findOrFail($id);
+    $medicines = Product::with('packagingMaterials')->get();
+    return view('pages.demand.edit', compact('demand', 'medicines'));
 }
 
     
 
     
-   public function update(Request $request, $id)
-{
-    $demand = Demand::findOrFail($id);
-    $medicine = $demand->material;
+    public function update(Request $request, $id)
+    {
+        $demand = Demand::findOrFail($id);
 
-    if (!$medicine) {
-        return redirect()->back()->with('error', 'Related medicine not found.');
-    }
+        // Validate
+        $request->validate([
+            'status' => 'required|in:Pending,Approved,Rejected',
+            'name' => 'nullable|string',
+        ]);
 
-    // Validate
-    $request->validate([
-        'status' => 'required|in:Pending,Approved,Rejected',
-        'approved_qty' => 'nullable|numeric|min:1',
-    ]);
+        // Update demand
+        $demand->update([
+            'status' => $request->status,
+            'name' => $request->name ?? $demand->name,
+        ]);
 
-    if ($request->status == 'Approved') {
+        if ($request->status == 'Approved') {
+            $demand->date_approved = now()->toDateString();
+            $demand->save();
 
-        if (!$request->approved_qty) {
-            return redirect()->back()->with('error', 'Approved quantity required when approving.');
+            // Deduct from stock for all items
+            foreach ($demand->items as $item) {
+                $product = $item->product;
+                if ($item->quantity > $product->stock) {
+                    return redirect()->back()->with('error', 'Insufficient stock for ' . $product->name);
+                }
+                $product->stock -= $item->quantity;
+                $product->save();
+            }
         }
 
-        if ($request->approved_qty > $medicine->stock) {
-            return redirect()->back()->with('error', 'Approved quantity exceeds stock.');
-        }
-
-        $demand->approved_qty = $request->approved_qty;
-        $medicine->stock -= $request->approved_qty;
-        $medicine->save();
-
-        $demand->date_approved = now();
-    } else {
-        $demand->approved_qty = null;
-        $demand->date_approved = null;
+        return redirect()->route('demands.index')->with('success', 'Demand updated successfully.');
     }
-
-    $demand->status = $request->status;
-    $demand->save();
-
-    return redirect()->route('demands.index')
-                     ->with('success', 'Demand updated successfully.');
-}
 
 
 
@@ -113,18 +116,20 @@ public function edit($id)
 
 
 
-public function destroy($id)
-{
-    $demand = Demand::findOrFail($id);
-    $demand->delete();
+    public function destroy($id)
+    {
+        $demand = Demand::findOrFail($id);
+        $demand->items()->delete();
+        $demand->delete();
 
-    return redirect()->route('demands.index')
-                     ->with('success', 'Demand deleted successfully');
-}
+        return redirect()->route('demands.index')->with('success', 'Demand deleted successfully');
+    }
 
- 
-
-
+    public function materials($id)
+    {
+        $demand = Demand::with('items.product.packagingMaterials')->findOrFail($id);
+        return view('pages.demand.materials', compact('demand'));
+    }
 
 
 

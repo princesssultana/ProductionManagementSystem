@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Category;
 use App\Models\Demand;
+use App\Models\Product;
 use App\Models\Stock;
+use App\Models\PackagingMaterial;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 class AdminnController extends Controller
 {
@@ -12,44 +16,77 @@ class AdminnController extends Controller
     {
         $year = $request->get('year', now()->year);
 
-        // Stats
-        $materials = Stock::count(); // Total number of stock items
-        $demands   = Demand::count(); // Total demands
-        $pending   = Demand::where('status', 'pending')->count(); // Pending demands
+        // Key Statistics
+        $totalMedicines = Product::count();
+        $totalCategories = Category::count();
+        $totalProductionOrders = Demand::count();
+        $totalPackagingMaterials = PackagingMaterial::count();
+        $totalUsers = User::count();
+        $totalAdmins = User::where('role', 'admin')->count();
 
-        // Monthly Demands
-        $monthlyDemands = Demand::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
+        // Production Orders Status Breakdown
+        $ordersApproved = Demand::where('status', 'Approved')->count();
+        $ordersPending = Demand::where('status', 'Pending')->count();
+        $ordersRejected = Demand::where('status', 'Rejected')->count();
+
+        // Low stock medicines (threshold: 50 units)
+        $lowStockThreshold = 50;
+        $lowStockMedicines = Product::where('stock', '<=', $lowStockThreshold)
+            ->orderBy('stock', 'asc')
+            ->get();
+
+        // Monthly Production Orders
+        $monthlyOrders = Demand::selectRaw('MONTH(created_at) as month, COUNT(*) as total')
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->pluck('total', 'month');
 
-        // Monthly Stock
-        $monthlyStock = Stock::selectRaw('MONTH(created_at) as month, SUM(quantity) as total')
+        // Monthly Medicine Demand Quantity
+        $monthlyDemandQty = Demand::selectRaw('MONTH(created_at) as month')
             ->whereYear('created_at', $year)
             ->groupBy('month')
             ->pluck('total', 'month');
 
-        // Low stock threshold (can be dynamic later)
-        $threshold = 50;
+        // Recently Created Production Orders
+        $recentOrders = Demand::orderBy('created_at', 'desc')
+            ->with('items.product')
+            ->limit(5)
+            ->get();
 
-        // Low stock items (include 0 or NULL quantities)
-        $lowStockItems = Stock::where(function($q) use ($threshold) {
-            $q->where('quantity', '<=', $threshold)
-              ->orWhereNull('quantity');
-        })->get();
+        // Recent Medicines
+        $recentMedicines = Product::orderBy('created_at', 'desc')
+            ->with('category')
+            ->limit(5)
+            ->get();
 
-        // Count of low stock items
-        $lowStockCount = $lowStockItems->count();
+        // Category-wise Medicine Count
+        $medicinesByCategory = Product::selectRaw('category_id, COUNT(*) as count')
+            ->groupBy('category_id')
+            ->with('category')
+            ->get();
+
+        // Packaging Material Stock Status
+        $materialStats = PackagingMaterial::selectRaw('COUNT(*) as total, SUM(CASE WHEN status = "active" THEN 1 ELSE 0 END) as active')
+            ->first();
 
         return view('pages.admin.dashboard', compact(
-            'materials',
-            'demands',
-            'pending',
-            'monthlyDemands',
-            'monthlyStock',
-            'threshold',
-            'lowStockItems',   // List of low stock items
-            'lowStockCount',   // Count for alert badges
+            'totalMedicines',
+            'totalCategories',
+            'totalProductionOrders',
+            'totalPackagingMaterials',
+            'totalUsers',
+            'totalAdmins',
+            'ordersApproved',
+            'ordersPending',
+            'ordersRejected',
+            'lowStockMedicines',
+            'lowStockThreshold',
+            'monthlyOrders',
+            'monthlyDemandQty',
+            'recentOrders',
+            'recentMedicines',
+            'medicinesByCategory',
+            'materialStats',
             'year'
         ));
     }

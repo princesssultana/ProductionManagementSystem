@@ -6,9 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class PackagingMaterial extends Model
 {
-   public function demands()
+    protected $guarded = [];
+
+    public function demands()
     {
         return $this->hasMany(Demand::class);
     }
-    protected $guarded=[];
+
+    // Many-to-Many relationship with Product
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_packaging_material')
+                    ->withPivot('quantity_per_unit')
+                    ->withTimestamps();
+    }
 }
