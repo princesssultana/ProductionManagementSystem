@@ -4,12 +4,12 @@
 
 <div class="container mt-4">
     <div class="row">
-        <div class="col-md-6 mx-auto">
+        <div class="black">
             <div class="card">
-                <div class="card-header bg-primary text-white">
+                <div class="black">
                     <h4 class="mb-0">Create New Admin User</h4>
                 </div>
-                <div class="card-body">
+                <div class="">
                     @if($errors->any())
                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                             <h5 class="alert-heading">Validation Errors!</h5>

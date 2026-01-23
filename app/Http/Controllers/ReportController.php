@@ -25,7 +25,7 @@ class ReportController extends Controller
             ->latest()
             ->get();
 
-        // 🔥 products table অনুযায়ী sum
+        // 🔥 products table onujayi sum
         $totalProduction = $productions->sum('stock');
         $totalDemand     = DemandItem::sum('quantity');
         $totalStock      = Product::sum('stock');
