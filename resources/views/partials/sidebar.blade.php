@@ -6,7 +6,7 @@
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
                             
-                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="#"> <svg class="bi" aria-hidden="true">
+                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin.dashboard')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
                                     Dashboard
@@ -16,7 +16,7 @@
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('category.list')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Categories
+                                    Medicine Categories
                                 </a> 
                             </li>
 
@@ -27,35 +27,35 @@
                                 </a> 
                             </li>
 
-                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('customer.index')}}"> <svg class="bi" aria-hidden="true">
+                             <!-- <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('customer.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
                                     Customers
                                 </a> 
-                            </li>
+                            </li> -->
 
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('demands.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Demand details
+                                    Production Orders
                                 </a> 
                             </li>
 
                             <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('materials.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Packaging materials
+                                    Packaging Materials
                                 </a> 
                             </li>
 
                             
                             
-                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('stocks.index')}}"> <svg class="bi" aria-hidden="true">
+                              <!-- <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('stocks.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Stock
+                                    Stock Management
                                 </a> 
-                            </li>
+                            </li> -->
                             
 
                                
@@ -66,10 +66,10 @@
                                     Reports
                                 </a> 
                             </li>
-                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin.dashboard')}}"> <svg class="bi" aria-hidden="true">
+                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('admin-users.index')}}"> <svg class="bi" aria-hidden="true">
                                         <use xlink:href="#house-fill"></use>
                                     </svg>
-                                    Admin users
+                                    Admin Users
                                 </a> 
                             </li>
                              <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="{{route('factory-settings.index')}}"> <svg class="bi" aria-hidden="true">
@@ -84,12 +84,23 @@
                         
                         <hr class="my-3">
                         <ul class="nav flex-column mb-auto">
-                            
-                            <li class="nav-item"> <a class="nav-link d-flex align-items-center gap-2" href="#"> <svg class="bi" aria-hidden="true">
-                                        <use xlink:href="#door-closed"></use>
-                                    </svg>
-                                    Sign out
-                                </a> </li>
+                            <li class="nav-item">
+                                <div class="text-muted mb-2">
+                                    <small>Logged in as: <strong>{{ Auth::user()?->name ?? 'Guest' }}</strong></small><br>
+                                    <small class="text-secondary">{{ Auth::user()?->email ?? '' }}</small>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <form action="{{ route('auth.logout') }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <button type="submit" class="nav-link d-flex align-items-center gap-2 border-0 bg-transparent" style="cursor: pointer;">
+                                        <svg class="bi" aria-hidden="true">
+                                            <use xlink:href="#door-closed"></use>
+                                        </svg>
+                                        Sign Out
+                                    </button>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                 </div>

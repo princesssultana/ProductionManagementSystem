@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Demand;
+use App\Models\DemandItem;
 use App\Models\Stock;
 
 class ReportController extends Controller
@@ -24,9 +25,9 @@ class ReportController extends Controller
             ->latest()
             ->get();
 
-        // 🔥 products table অনুযায়ী sum
+        // 🔥 products table onujayi sum
         $totalProduction = $productions->sum('stock');
-        $totalDemand     = Demand::sum('qty');
+        $totalDemand     = DemandItem::sum('quantity');
         $totalStock      = Product::sum('stock');
 
         return view('pages.report.production', compact(

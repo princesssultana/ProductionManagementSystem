@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('demands', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('qty');
+          
             $table->foreignId('medicine_id')->nullable()->constrained('products')->onDelete('cascade');
             $table->integer('approved_qty')->nullable();
             $table->string('status')->default('Pending');
