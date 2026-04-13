@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Customer;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -26,18 +27,14 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     { 
-         Customer::create([
+         $customer = Customer::create([
     'name' => $request->name,
    'email' => $request->email,
-   'phone' => $request->phone,
-   'address' => $request->address,
-   'password' => bcrypt($request->password),
-   'status' => 'active'
-
-
+   ]);
+   Order::create([
+        'customer_id' => $customer->id,
+        'amount' => $request->amount
     ]);
-
-    return redirect()->route('customer.index');
 
     }
      public function index()
@@ -79,6 +76,9 @@ public function destroy($id)
     // Redirect back with success message
     return redirect()->route('customer.index')->with('success', 'Customer deleted successfully');
 }
+
+
+
 
 
 

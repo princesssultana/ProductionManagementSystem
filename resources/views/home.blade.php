@@ -1,9 +1,9 @@
 @extends('master')
 
+
 @section('content')
 
-
-<h5>Welcome to my project</h5>
-
+<h1>Welcome Home</h1>
 
 @endsection
+

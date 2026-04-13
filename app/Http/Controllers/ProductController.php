@@ -28,6 +28,12 @@ public function create()
   public function store(Request $request)
 
   {
+     $fileName='';
+        if($request->hasFile('image')){
+            $file=$request->file('image');
+            $fileName= date('Ymdhis').$file->getClientOriginalName();
+            $file->storeAs('/products', $fileName);
+        }
     
     Product::create([
       'name' => $request->product_name,
@@ -37,6 +43,7 @@ public function create()
            'description' => $request->product_description,
             
            'status' => $request->status,
+            'image' =>$fileName
     ]);  return redirect()->route('products.list');
   }
 

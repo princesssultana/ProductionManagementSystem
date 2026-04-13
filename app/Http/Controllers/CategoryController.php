@@ -26,6 +26,17 @@ class CategoryController extends Controller
 
 public function storeCategory(Request $request)
 {
+    
+      $validation=Validator::make($request->all(),[
+         'c_name'=>'required',
+         'c_description'=>'required',
+      ]);
+
+        if($validation->fails())
+        {
+            return redirect()->back()->withErrors($validation)->withInput();
+        }
+
     // databease data save or store
     Category::create([
          //bam pase column name => dan pase input field er name
@@ -35,7 +46,7 @@ public function storeCategory(Request $request)
         'status'          => $request->status,
     ]);
 
-    return redirect()->route('products.list');
+    return redirect()->route('category.list');
 }
 
 

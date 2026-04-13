@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\AdminnController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategorylistController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DemandController;
 use App\Http\Controllers\DemandDetailsController;
 use App\Http\Controllers\FactorySettingsController;
+use App\Http\Controllers\Frontend\HomeController as WebsiteHomeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\PackagingMaterialController;
@@ -22,7 +24,21 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+//website routes panel
+Route::get('/', [WebsiteHomeController::class, 'home'])->name('website.home');
+
+
+
+
+
+//admin routes
+Route::group (['prefix'=>'admin'], function(){
+Route::get('/login',[AuthController::class,'loginForm'])->name('login');
+Route::post('/login/submit',[AuthController::class,'loginSubmit'])->name('login.submit');
+
+Route::group(['middleware'=>'auth'], function(){
 Route::get('/',[HomeController::class,'home']);
+
 
 Route::get('/about-us',[HomeController::class,'aboutUs']);
 
@@ -67,6 +83,9 @@ Route::get('/reports/production', [ReportController::class, 'productionReport'])
 
 Route::resource('factories', FactorySettingsController::class);
 
+});
+
+});
 
 
 
@@ -78,17 +97,6 @@ Route::resource('factories', FactorySettingsController::class);
 
 
 
-
-
-
-Route::get('/factory-settings', [FactorySettingsController::class, 'index'])->name('factory-settings.index');
-Route::get('/factory-settings/create', [FactorySettingsController::class, 'create'])->name('factory-settings.create');
-
-
-
-
-Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
-Route::get('/payments/search', [PaymentController::class, 'search'])->name('payments.search');
 
 
 

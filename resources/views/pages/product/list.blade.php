@@ -10,13 +10,14 @@
     <thead>
       <tr>
         <th>#</th>
-        <th>Product Name</th>
-        <th>Category Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Stock</th>
-        <th>Status</th>
-        <th>Actions</th>
+        <th scope="col">Product Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Category Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Status</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,9 @@
         <tr>
           <td>{{ $singleProduct->id }}</td>
           <td>{{ $singleProduct->name }}</td>
+          <td>
+          <img width="100px" src="{{url('/products/'.$singleProduct->image)}}" alt="test">
+        </td>
            <td>{{ $singleProduct->category_id
  }}</td>
           <td>{{ $singleProduct->description }}</td>
